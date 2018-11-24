@@ -56,6 +56,9 @@ class Node:
 	def children(self):
 		return self._children
 
+	def key(self):
+		return self._data
+
 	def __repr__(self):
 		# if len(self._children) == 0: return "Node({})".format(self._data)
 		# return "Node({}, children={})".format(self._data, self._children)
