@@ -1,35 +1,75 @@
 from queue import Queue
 from node import Node
 
-def breadthfirst(queue, node):
 
-	children = node.children()
-	for c in children:
-		breadthfirst(queue, c)
-		print(node._data)
-
-	return
-
-def search(start, goal):
-	from time import sleep
-
+def breadthfirst(start, goal, v=False):
 	queue = [start]
 	reached = [start]
 
 	while queue:
 		state = queue.pop(0)
 		if state is goal:
+			if v: print("state:", state, "\t>\tnewex:", newex, "\t>\tchildren:", state.children())
 			return state
 
 		reached.append(state)
 		ex = state.expand()
 		newex = [s for s in ex if s not in reached]
-		print("state:", state, "\t>\tnewex:", newex, "\t>\tchildren:", state.children())
 		for e in newex:
 			queue.append(e)
-		a = 0
-		sleep(1)
 
+		if v:
+			print("state:", state, "\t>\tnewex:", newex, "\t>\tchildren:", state.children())
+			sleep()
+
+	return None
+
+
+def depthfirst(start, goal, v=False):
+	stack = [start]
+	reached = [start]
+
+	while stack:
+		state = stack.pop(0)
+		if state is goal:
+			if v: print("state:", state, "\t>\tnewex:", newex, "\t>\tchildren:", state.children())
+			return state
+
+		reached.append(state)
+		ex = state.expand()
+		newex = [s for s in ex if s not in reached]
+		for e in newex:
+			stack.insert(0, e)
+
+		if v:
+			print("state:", state, "\t>\tnewex:", newex, "\t>\tchildren:", state.children())
+			sleep()
+
+	return None
+
+
+def sleep():
+	from time import sleep
+	sleep(0.2)
+
+def search(start, goal, strategy, asc=True, v=False):
+	queue = [start]
+	reached = [start]
+
+	while queue:
+		state = queue.pop(0)
+		if state is goal:
+			if v: print("state:", state, "\t>\tnewex:", state.children())
+			return state
+
+		reached.append(state)
+		ex = state.expand()
+		newex = [s for s in ex if s not in reached]
+		queue = strategy(queue, newex)
+
+		if v:
+			print("state:", state, "\t>\tnewex:", newex, "\t>\tchildren:", state.children())
+			sleep()
 
 	return None
 
@@ -56,6 +96,6 @@ if __name__ == '__main__':
 	print(str(root))
 
 	queue = Queue(5)
-	print(search(root, goal))
-
-
+	print(breadthfirst(root, goal, v=True))
+	print("")
+	print(depthfirst(root, goal, v=True))
