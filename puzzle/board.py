@@ -1,5 +1,6 @@
 from puzzle.node import Node
 
+
 def solve(start, goal):
 	queue = [start]
 	reached = [start]
@@ -7,8 +8,7 @@ def solve(start, goal):
 	while queue:
 		state = queue.pop(0)
 		if state == goal:
-			print(">> len:", len(reached), ",", "# # " * 30, "\n")
-			return state
+			return state, len(reached)
 
 		reached.append(state)
 		children = state.expand()
@@ -26,8 +26,11 @@ def solve(start, goal):
 
 	return None
 
+
+u_cost = 1
+
+
 if __name__ == '__main__':
-	u_cost = 1
 
 	init = [
 		[2, 8, 3],
@@ -43,4 +46,11 @@ if __name__ == '__main__':
 	root = Node(init)
 	goal = Node(final)
 
-	print(solve(root, goal))
+	result, path_len = solve(root, goal)
+	costs_total = path_len * u_cost
+
+	print("init:\t\t", root)
+	print("goal:\t\t", goal)
+	print("cost p/p:\t", u_cost)
+	print("path len:\t", path_len)
+	print("costs:\t\t", costs_total)
