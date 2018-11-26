@@ -12,3 +12,6 @@ Thumbs.db
 __pycache__/
 
 KI*.pdf
+
+*venv/
+venv/
