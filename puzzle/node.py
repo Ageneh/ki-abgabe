@@ -15,7 +15,17 @@ class Node:
 	def set_data(self, data):
 		self._data = data
 
-	def expand(self): return list(filter(lambda x: x is not None and x._data, list(self.children().values())))
+	def expand(self):
+		data = self.children()
+		# children = list(map(
+		# 		lambda x: x.set_move(x[0]).set_parent(self),
+		# 		filter(lambda x: x[1] is not None and x[1]._data, data))
+		# )
+		children = list(filter(lambda x: x is not None and x._data, list(self.children().values())))
+		for c in children:
+			c.set_parent(parent=self)
+
+		return children
 
 	def set_children(self):
 		self._empty_x, self._empty_y = self.get_empty()
@@ -68,6 +78,15 @@ class Node:
 	def children(self): return self.set_children()
 
 	def key(self): return self._data
+
+	def parent(self):
+		return self._parent
+
+	def set_parent(self, parent=None):
+		self._parent = parent
+
+	def set_move(self, direction):
+		self._move = str(direction) if type(direction) is str else direction
 
 	def __repr__(self): return self.__str__()
 
