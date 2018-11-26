@@ -15,37 +15,6 @@ def depthfirst(stack, expanded):
 	return stack
 
 
-def __depthfirst(start, goal):
-	queue = [start]
-	reached = [start]
-	depth = 0
-
-	while queue:
-		state = queue.pop(0)
-
-		if state._depth >= 6:
-			continue
-
-		if state == goal:
-
-			path = [state]
-			while hasattr(path[-1], "_parent"):
-				path.append(path[-1].parent())
-
-			return path[::-1], len(reached)
-
-		reached.append(state)
-		children = state.expand()
-		depth += 1
-		newex = [s for s in children if s not in reached]
-
-		queue = depthfirst(queue, newex)
-
-		print(reached[-1]._depth)
-
-	return None
-
-
 def path(node, reversed=False):
 	path = [node]
 	while path[-1].parent():
