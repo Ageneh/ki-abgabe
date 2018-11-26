@@ -10,6 +10,8 @@ def solve(start, goal):
 		if state == goal:
 			return state, len(reached)
 
+		print(state)
+
 		reached.append(state)
 		children = state.expand()
 		newex = [s for s in children if s not in reached]
@@ -51,6 +53,7 @@ if __name__ == '__main__':
 
 	print("init:\t\t", root)
 	print("goal:\t\t", goal)
+	print("result:\t\t", result)
 	print("cost p/p:\t", u_cost)
 	print("path len:\t", path_len)
 	print("costs:\t\t", costs_total)
