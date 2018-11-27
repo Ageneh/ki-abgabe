@@ -6,12 +6,15 @@ class Node:
 	__keys = [_l, _u, _d, _r]
 	empty = 0
 
-	def __init__(self, data):
+	def __init__(self, data, root=False, goal=False):
 		self._data = None
 		# self._children = { k:None for k in Node.__keys }
 		self._children = {}
 		self.set_data(data)
 		self.set_depth(0)
+		self._parent = None
+		self._root = True if root else False
+		self._goal = True if goal else False
 
 	def set_data(self, data):
 		self._data = data
@@ -89,6 +92,10 @@ class Node:
 
 	def set_parent(self, parent=None):
 		self._parent = parent
+
+	def is_root(self): return self._root
+
+	def is_goal(self): return self._goal
 
 	def set_move(self, direction):
 		self._move = str(direction) if type(direction) is str else direction
