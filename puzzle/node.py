@@ -7,8 +7,6 @@ class Node:
 	_empty = 0
 
 	def __init__(self, data, root=False, goal=False, depth=0, direction=None, parent=None):
-		self._data = None
-		# self._children = { k:None for k in Node.__keys }
 		self._children = {}
 		self.set_data(data)
 		self.set_depth(depth)
