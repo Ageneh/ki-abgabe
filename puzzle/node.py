@@ -18,7 +18,8 @@ class Node:
 	def depth(self): return self._depth
 
 	def expand(self):
-		data = self.children()
+		"""Expands a node and returns its adjacent nodes."""
+		self._children = self.children()
 		children = list(filter(lambda x: x and x._data, list(self.children().values())))
 
 		return children
@@ -32,6 +33,7 @@ class Node:
 		return self._parent if hasattr(self, "_parent") else None
 
 	def data_copy(self):
+		"""Copies data from a node in a new list and returns the copy."""
 		copy = []
 		for lst in self._data:
 			copy.append([ele for ele in lst])
@@ -49,7 +51,7 @@ class Node:
 	def is_goal(self): return self._goal
 
 	def get_pos(self, val=_empty):
-		"""Returns a tuple containing the x and y coordinates of the empty space."""
+		"""Returns a tuple containing the x and y coordinates of the given value 'val'."""
 		for row in self._data:
 			if val in row:
 				x, y = row.index(val), self._data.index(row)
