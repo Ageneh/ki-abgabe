@@ -1,6 +1,6 @@
-from puzzle.a_star.a_star import AStar, h_manhattan, h_hamilton
+from puzzle.a_star import AStar, h_manhattan, h_hamilton
 from puzzle.node import Node
-from puzzle.universal.universal import Universal, breadthfirst, depthfirst
+from puzzle.universal import depthfirst
 
 
 def print_result(solution, horiz=False):
