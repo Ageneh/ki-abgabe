@@ -1,16 +1,31 @@
-from puzzle.board import solve, depthfirst, breadthfirst, path
+from puzzle.a_star.a_star import AStar, h_manhattan, h_hamilton
 from puzzle.node import Node
+from puzzle.universal.universal import Universal, breadthfirst, depthfirst
 
 
-def print_result(solution):
-	for r in result:
-		for l in r._data:
-			print(l)
+def print_result(solution, horiz=False):
+	if not horiz:
+		for r in solution:
+			for l in r._data:
+				print(l)
+			print("")
+	else:
+		lines = {}
+		last = len(solution) - 1
+		for board in solution:
+			for r in range(len(board)):
+				if r not in lines: lines[r] = ""
+
+				lines[r] += str(board[r])
+
+				if solution.index(board) < last: lines[r] += "\t|\t"
+
+		for l in sorted(lines.keys()): print(lines[l])
+
 		print("")
 
 
 if __name__ == '__main__':
-
 	u_cost = 1
 
 	init = [
@@ -27,7 +42,8 @@ if __name__ == '__main__':
 	root = Node(init, root=True)
 	goal = Node(final, goal=True)
 
-	result, path_len = solve(root, goal, strategy=depthfirst)
+	alg = AStar()
+	result, path_len = alg.solve(root, goal, strategy=depthfirst, heuristic=h_hamilton)
 	costs_total = len(result) * u_cost
 
 	print("init:\t\t", root)
@@ -35,7 +51,7 @@ if __name__ == '__main__':
 	print("result:\t\t")
 
 	print("")
-	print_result(result)
+	print_result(result, horiz=True)
 
 	print("cost p/p:\t", u_cost)
 	print("len:\t\t", len(result))

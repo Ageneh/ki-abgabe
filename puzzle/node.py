@@ -37,15 +37,22 @@ class Node:
 			copy.append([ele for ele in lst])
 		return copy
 
+	def path(self, reversed=False):
+		"""Returns a list containing all steps. Either in correct or reversed order."""
+		path = [self]
+		while path[-1].parent() and not path[-1].is_root():
+			path.append(path[-1].parent())
+		return path[::-1] if not reversed else path
+
 	def is_root(self): return self._root
 
 	def is_goal(self): return self._goal
 
-	def get_empty(self):
+	def get_pos(self, val=_empty):
 		"""Returns a tuple containing the x and y coordinates of the empty space."""
 		for row in self._data:
-			if self._empty in row:
-				x, y = row.index(self._empty), self._data.index(row)
+			if val in row:
+				x, y = row.index(val), self._data.index(row)
 				return x, y
 
 	def set_data(self, data):
@@ -54,7 +61,7 @@ class Node:
 	def set_depth(self, depth): self._depth = depth
 
 	def set_children(self):
-		empty_x, empty_y = self.get_empty()
+		empty_x, empty_y = self.get_pos()
 
 		if empty_x > 0:
 			left = self.data_copy()
@@ -101,3 +108,9 @@ class Node:
 
 	def __hash__(self):
 		return hash((str(self._data)))
+
+	def __getitem__(self, item):
+		return self._data[item]
+
+	def __len__(self):
+		return len(self._data) if self._data else 0
