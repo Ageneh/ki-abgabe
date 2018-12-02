@@ -10,17 +10,18 @@ def depthfirst(stack, expanded):
 	return stack
 
 
-class Universal:
+class Uninformed:
 
 	@staticmethod
 	def solve(start, goal, strategy=breadthfirst, max_depth=6, **args):
 		queue = [start]
 		reached = [start]
+		is_depth = strategy is depthfirst
 
 		while queue:
 			state = queue.pop(0)
 
-			if state.depth() >= max_depth: continue
+			if is_depth and state.depth() >= max_depth: continue
 
 			if state == goal:
 				return state.path(), len(reached)

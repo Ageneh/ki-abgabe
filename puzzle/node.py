@@ -20,9 +20,7 @@ class Node:
 	def expand(self):
 		"""Expands a node and returns its adjacent nodes."""
 		self._children = self.children()
-		children = list(filter(lambda x: x and x._data, list(self.children().values())))
-
-		return children
+		return list(filter(lambda x: x and x._data, list(self.children().values())))
 
 	def children(self):
 		if len(self._children.values()) > 1:
@@ -100,10 +98,11 @@ class Node:
 		self._move = str(direction) if type(direction) is str else direction
 
 	def __repr__(self):
-		return self.__str__()
+		return "Node({}, root={}, goal={}, depth={}, direction={}, parent={})"\
+			.format(self._data, self._root, self._goal, self._depth, self._move, self._parent)
 
 	def __str__(self):
-		return "Node({}, root={}, goal={})".format(self._data, self._root, self._goal)
+		return "Node({}, direction={}, parent={})".format(self._data, self._move, self._parent)
 
 	def __eq__(self, other):
 		return self.__hash__() == other.__hash__()

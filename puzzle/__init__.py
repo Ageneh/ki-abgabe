@@ -1,6 +1,6 @@
 from puzzle.a_star import AStar, h_manhattan, h_hamilton
 from puzzle.node import Node
-from puzzle.universal import depthfirst
+from puzzle.uninformed import depthfirst, Uninformed, breadthfirst
 
 
 def print_result(solution, horiz=False):
@@ -43,7 +43,7 @@ if __name__ == '__main__':
 	goal = Node(final, goal=True)
 
 	alg = AStar()
-	result, path_len = alg.solve(root, goal, strategy=depthfirst, heuristic=h_hamilton)
+	result, path_len = alg.solve(root, goal, strategy=breadthfirst, heuristic=h_manhattan)
 	costs_total = len(result) * u_cost
 
 	print("init:\t\t", root)
