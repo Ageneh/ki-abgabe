@@ -5,24 +5,24 @@ from puzzle.uninformed import depthfirst, Uninformed, breadthfirst
 
 def print_result(solution, horiz=False):
     if not horiz:
-        for r in solution:
-            for l in r._data:
-                print(l)
+        for row in solution:
+            for col in row._data:
+                print(col)
             print("")
     else:
         lines = {}
         last = len(solution) - 1
         for board in solution:
-            for r in range(len(board)):
-                if r not in lines: lines[r] = ""
+            for row in range(len(board)):
+                if row not in lines: lines[row] = ""
 
-                lines[r] += str(board[r])
+                lines[row] += str(board[row])
 
-                if solution.index(board) < last: lines[r] += "\t|\t"
+                if solution.index(board) < last: lines[row] += "\t|\t"
 
-        for l in sorted(lines.keys()): print(lines[l])
+        for col in sorted(lines.keys()): print(lines[col])
 
-        print("")
+        return lines
 
 
 if __name__ == '__main__':
@@ -43,17 +43,16 @@ if __name__ == '__main__':
     goal = Node(final, goal=True)
 
     alg = AStar()
-    result, path_len = alg.solve(root, goal, strategy=depthfirst, heuristic=h_manhattan)
-    costs_total = len(result) * u_cost
+    result, path_len = alg.solve(root, goal, strategy=depthfirst, heuristic=h_hamilton)
 
     print("init:\t\t", root)
     print("goal:\t\t", goal)
-    print("result:\t\t")
+    print("\nresult:\t\t")
 
-    print("")
     print_result(result, horiz=True)
+    print("")
 
     print("cost p/p:\t", u_cost)
     print("len:\t\t", len(result))
-    print("costs:\t\t", costs_total)
+    print("costs:\t\t", result[-1].total_cost() * u_cost)
     print("checked:\t", path_len)
