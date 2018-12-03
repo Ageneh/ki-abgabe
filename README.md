@@ -59,4 +59,4 @@ Pfad:
 
 
 ---
-## *by ### deschadx and hearegax; [git](https://github.com/Ageneh/ki)*
+## *by deschadx and hearegax; [git](https://github.com/Ageneh/ki)*
