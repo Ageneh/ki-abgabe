@@ -21,7 +21,7 @@ def h_manhattan(node, goal):
 class AStar:
 
     @staticmethod
-    def solve(start, goal, heuristic=h_manhattan, log=False, log_file=None, **kwargs):
+    def solve(start, goal, heuristic=h_manhattan, log=False, log_file=None, w_costs=1, **kwargs):
         from datetime import datetime
         p_queue = [(0, start)]
         reached = [start]
@@ -46,9 +46,10 @@ class AStar:
                 file.write(str(i))
                 file.write(" node:")
                 file.write(str(state))
-                file.write("\n")
+                file.write("; ")
                 file.write("costs:")
                 file.write(str(current_costs[state]))
+                file.write("\n")
                 i += 1
 
             if state == goal:

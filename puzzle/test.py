@@ -29,8 +29,8 @@ if __name__ == '__main__':
     from datetime import datetime
 
 
-    alg = AStar()
-    result, path_len = alg.solve(root, goal, strategy=depthfirst, heuristic=h_hamilton, log=True)
+    alg = Uninformed()
+    result, path_len = alg.solve(root, goal, strategy=breadthfirst, heuristic=h_manhattan, log=True)
     costs_total = len(result) * u_cost
 
     print("\nresult:\t\t")
