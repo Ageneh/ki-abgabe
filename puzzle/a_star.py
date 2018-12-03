@@ -25,6 +25,7 @@ class AStar:
         from datetime import datetime
         p_queue = [(0, start)]
         reached = [start]
+        current_costs = {start: 0} # total costs to each node
         i = 1
         file = None
         if log:
@@ -46,6 +47,8 @@ class AStar:
                 file.write(" node:")
                 file.write(str(state))
                 file.write("\n")
+                file.write("costs:")
+                file.write(str(current_costs[state]))
                 i += 1
 
             if state == goal:
@@ -69,8 +72,14 @@ class AStar:
 
             reached.append(state)
             children = state.expand()
-            newex = [(cost + heuristic(s, goal), s) for s in children if s not in reached]
-            p_queue.extend(newex)
+
+            for child in children:
+                n_cost = current_costs[state] + w_costs
+                if child not in current_costs or n_cost < current_costs[child]:
+                    current_costs[child] = n_cost
+                    prio = n_cost + heuristic(child, goal)
+                    p_queue.append((prio, child))
+                    
             p_queue = sorted(p_queue, key=lambda x: x[0])
 
         file.close()
