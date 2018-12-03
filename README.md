@@ -1,7 +1,7 @@
 # 8-Puzzle-Suchproblem
 
 
-> Wenn eine logging Funktion gewünscht sein sollte, dann schauen Sie bitte in der Branch 'logging' nach.
+> Wenn eine logging Funktion gewünscht sein sollte, dann schauen Sie bitte in der Branch '[logging](https://github.com/Ageneh/ki/tree/logging)' nach.
 
 
 ## Zustandsraum S
