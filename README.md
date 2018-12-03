@@ -1,6 +1,9 @@
 # 8-Puzzle-Suchproblem
 
 
+> Wenn eine logging Funktion gewünscht sein sollte, dann schauen Sie bitte in der Branch 'logging' nach.
+
+
 ## Zustandsraum S
 Eine mögliche Anordnung des 8-Puzzle wird als Knoten repräsentiert. Die Knoten-Definition ist in 'node.py' in der Klasse Node zu finden.
 Ein Knoten besitzt folgende Eigenschaften/Variablen:
@@ -59,4 +62,4 @@ Pfad:
 
 
 ---
-## *by deschadx and hearegax; [git](https://github.com/Ageneh/ki)*
+## *by ### deschadx and hearegax; [git](https://github.com/Ageneh/ki)*
