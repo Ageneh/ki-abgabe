@@ -22,7 +22,7 @@ if __name__ == '__main__':
     goal = Node(final, goal=True)
 
     alg = Uninformed()
-    result, path_len = alg.solve(root, goal, strategy=depthfirst, heuristic=h_hamilton, log=True)
+    result, path_len = alg.solve(root, goal, strategy=breadthfirst, heuristic=h_hamilton, log=True)
     costs_total = len(result) * u_cost
 
     print("init:\t\t", root)

@@ -22,7 +22,7 @@ class Uninformed:
 		queue = [start]
 		reached = [start]
 		is_depth = strategy is depthfirst
-		i = 0
+		i = 1
 		file = None
 		if log:
 			if log_file:
@@ -42,9 +42,11 @@ class Uninformed:
 				file.write(" node: \t")
 				file.write(str(state))
 				file.write("\n")
+
 				i += 1
 
-			if is_depth and state.depth() >= max_depth: continue
+			if is_depth and state.depth() >= max_depth:
+				continue
 
 			if state == goal:
 				if log:
@@ -53,7 +55,7 @@ class Uninformed:
 					file.write(lines)
 					file.write("\n")
 					file.write("\nchecked nodes:\t")
-					file.write(str(len(reached)))
+					file.write(str(i))
 					file.write("\npath length:\t")
 					file.write(str(len(state.path())))
 					file.write("\n")
@@ -63,7 +65,7 @@ class Uninformed:
 
 					file.close()
 
-					return state.path(), len(reached)
+					return state.path(), i
 
 			reached.append(state)
 			children = state.expand()
