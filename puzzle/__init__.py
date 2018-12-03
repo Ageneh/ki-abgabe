@@ -15,6 +15,9 @@ def print_result(solution, horiz=False):
 
                 if solution.index(board) < last: lines[r] += "\t|\t"
 
-        for l in sorted(lines.keys()): print(lines[l])
+        string = "\n".join([lines[l] for l in sorted(lines.keys())])
 
-    return lines
+        # for l in sorted(lines.keys()): print(lines[l])
+        print(string)
+
+    return string

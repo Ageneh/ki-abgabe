@@ -14,6 +14,7 @@ class Node:
 		self.set_parent(parent)
 		self._root = True if root else False
 		self._goal = True if goal else False
+		self._cost = 1
 
 	def depth(self):
 		return self._depth
@@ -44,6 +45,15 @@ class Node:
 		while path[-1].parent() and not path[-1].is_root():
 			path.append(path[-1].parent())
 		return path[::-1] if not reversed else path
+
+	def cost(self):
+		return self._cost
+
+	def total_cost(self):
+		return self._total_cost if hasattr(self, "_total_cost") else 0
+
+	def set_total_cost(self, cost):
+		self._total_cost = cost
 
 	def is_root(self):
 		return self._root

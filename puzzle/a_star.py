@@ -42,7 +42,7 @@ class AStar:
 
 			if log:
 				file.write(str(i))
-				file.write(" node:")
+				file.write(" node:\t\t")
 				file.write(str(state))
 				file.write("; ")
 				file.write("costs:")
@@ -56,11 +56,15 @@ class AStar:
 				if log:
 					file.write("\nresult:\n")
 					lines = print_result(state.path(), horiz=True)
-					for l in sorted(lines.keys()):
-						file.write(lines[l])
-						file.write("\n")
+					file.write(lines)
+					file.write("\n")
+					file.write("\nchecked nodes:\t")
+					file.write(str(len(reached)))
 					file.write("\npath length:\t")
 					file.write(str(len(path)))
+					file.write("\n")
+					file.write("total costs:\t")
+					file.write(str(state.total_cost()))
 					file.write("\n")
 
 					file.close()
