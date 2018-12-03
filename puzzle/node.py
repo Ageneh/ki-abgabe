@@ -110,8 +110,8 @@ class Node:
         return "Node({}, root={}, goal={}, depth={}, direction={}, parent={})" \
             .format(self._data, self._root, self._goal, self._depth, self._move, self._parent)
 
-    def __str__(self):
-        return "Node({}, direction={})".format(self._data, self._move)
+	def __str__(self):
+		return "Node({}, direction={})".format(self._data, self._move)
 
     def __eq__(self, other):
         return self.__hash__() == other.__hash__()

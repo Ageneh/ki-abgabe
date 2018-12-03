@@ -1,6 +1,3 @@
-from puzzle import print_result
-
-
 def h_hamilton(node, goal):
     sum = 0
     for y in range(len(node)):
@@ -71,17 +68,19 @@ class AStar:
 
             print("node:", state)
 
-            reached.append(state)
-            children = state.expand()
+			reached.append(state)
+			children = state.expand()
 
-            for child in children:
-                n_cost = current_costs[state] + w_costs
-                if child not in current_costs or n_cost < current_costs[child]:
-                    current_costs[child] = n_cost
-                    prio = n_cost + heuristic(child, goal)
-                    p_queue.append((prio, child))
-                    
-            p_queue = sorted(p_queue, key=lambda x: x[0])
+			for child in children:
+				cost_to_child = costs_nodes[state] + child.cost()
+				heuristic_val = heuristic(child, goal)
+				n_cost = cost_to_child + heuristic_val
+				if child not in costs_nodes or n_cost < costs_nodes[child]:
+					costs_nodes[child] = cost_to_child
+					child.set_total_cost(cost_to_child)
+					p_queue.append((n_cost, child))
+
+			p_queue = sorted(p_queue, key=lambda x: x[0])
 
         file.close()
 
