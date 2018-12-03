@@ -17,14 +17,17 @@ class Uninformed:
         queue = [start]
         reached = [start]
         is_depth = strategy is depthfirst
+        i = 1
 
         while queue:
             state = queue.pop(0)
 
+            i += 1
+
             if is_depth and state.depth() >= max_depth: continue
 
             if state == goal:
-                return state.path(), len(reached)
+                return state.path(), i
 
             reached.append(state)
             children = state.expand()

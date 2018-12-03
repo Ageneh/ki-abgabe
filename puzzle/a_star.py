@@ -22,12 +22,15 @@ class AStar:
 		p_queue = [(0, start)]  # [(dist + heuristic_val, node), ...]
 		reached = [start]
 		costs_nodes = {start: 0}  # total costs to each node
+		i = 1
 
 		while p_queue:
 			cost, state = p_queue.pop(0)
 
+			i += 1
+
 			if state == goal:
-				return state.path(), len(reached)
+				return state.path(), i
 
 			reached.append(state)
 			children = state.expand()
